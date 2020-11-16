@@ -1,6 +1,7 @@
 package com.mauroPignatta.states;
 
 import com.mauroPignatta.algoriths.*;
+import com.mauroPignatta.config.Configuration;
 import com.mpJavaGame.state.State;
 import com.mpJavaGame.state.StateManager;
 import com.mpJavaGame.ui.objects.TextButton;
@@ -18,7 +19,7 @@ public class MenuState extends State {
 
     public static String NAME = "Menu";
 
-    List<UIButton> buttons;
+    private List<UIButton> buttons;
 
     public MenuState() {
         super(NAME);
@@ -27,7 +28,7 @@ public class MenuState extends State {
 
     private void initButtons() {
         int x = WIDTH / 2;
-        int y = HEIGHT / 10;
+        int y = HEIGHT / 15;
         Font font = new Font(Font.SANS_SERIF, Font.PLAIN, WIDTH / 20);
         Color color = Color.white;
         Color hover = Color.green;
@@ -36,28 +37,42 @@ public class MenuState extends State {
         UIButton bubbleSort = new TextButton(x, y, 0.5f,color, hover, font, "BubbleSort") {
             @Override
             protected void onClick() {
-                start(new BubbleSort(initArray()));
+                start(new BubbleSort(initArray(), Configuration.DESC));
             }
         };
 
         UIButton IBubbleSort = new TextButton(x, y * 2, 0.5f, color, hover, font, "Improved Bubble Sort") {
             @Override
             protected void onClick() {
-                start(new ImprovedBubbleSort(initArray()));
+                start(new ImprovedBubbleSort(initArray(), Configuration.DESC));
             }
         };
 
         UIButton insertionSort = new TextButton(x, y * 3, 0.5f, color, hover, font, "Insertion Sort") {
             @Override
             protected void onClick() {
-                start(new InsertionSort(initArray()));
+                start(new InsertionSort(initArray(), Configuration.DESC));
             }
         };
 
         UIButton selectionSort = new TextButton(x, y * 4, 0.5f, color, hover, font, "Selection Sort") {
             @Override
             protected void onClick() {
-                start(new SelectionSort(initArray()));
+                start(new SelectionSort(initArray(), Configuration.DESC));
+            }
+        };
+
+        UIButton gnomeSort = new TextButton(x, y * 5, 0.5f, color, hover, font, "Gnome Sort") {
+            @Override
+            protected void onClick() {
+                start(new GnomeSort(initArray(), Configuration.DESC));
+            }
+        };
+
+        UIButton cocktailSort = new TextButton(x, y * 6, 0.5f, color, hover, font, "Cocktail Sort") {
+            @Override
+            protected void onClick() {
+                start(new CocktailSort(initArray(), Configuration.DESC));
             }
         };
 
@@ -69,12 +84,13 @@ public class MenuState extends State {
         };
 
 
-
         buttons = new LinkedList<>();
         buttons.add(bubbleSort);
         buttons.add(IBubbleSort);
         buttons.add(insertionSort);
         buttons.add(selectionSort);
+        buttons.add(gnomeSort);
+        buttons.add(cocktailSort);
         buttons.add(exit);
 
     }
@@ -83,7 +99,7 @@ public class MenuState extends State {
     public void inputs() {}
 
     @Override
-    public void update() {
+    public void update(double delta) {
         for(UIButton  button : buttons)
             button.update();
     }

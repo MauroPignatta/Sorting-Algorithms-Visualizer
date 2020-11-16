@@ -28,6 +28,7 @@ public class Visualizer extends Loop {
         array = new int[SIZE];
         window = new Window("Sorting Algorithms Visualizer", WIDTH, HEIGHT);
         window.resize(Configuration.RES_WIDTH, Configuration.RES_HEIGHT);
+        window.makeVisible();
         capFPS(144);
 
         StateManager.getManager().addState(new MenuState());
@@ -40,8 +41,8 @@ public class Visualizer extends Loop {
     }
 
     @Override
-    protected void update() {
-        StateManager.getManager().update();
+    protected void update(double delta) {
+        StateManager.getManager().update(delta);
     }
 
     @Override

@@ -7,6 +7,7 @@ import java.util.Properties;
 
 public class Configuration {
 
+    public static boolean DESC = false;
     public static int SIZE = 400;
     public static int WIDTH = SIZE;
     public static int HEIGHT = SIZE;
@@ -33,6 +34,7 @@ public class Configuration {
             props.setProperty("Iterations_Per_Second","" + UPS);
             props.setProperty("Resolution_Width","" + RES_WIDTH);
             props.setProperty("Resolution_Height","" + RES_HEIGHT);
+            props.setProperty("Descending","" + DESC);
             props.store(new FileOutputStream(config), null);
 
         } catch (IOException e) {
@@ -48,6 +50,7 @@ public class Configuration {
             String ups = props.getProperty("Iterations_Per_Second");
             String res_width = props.getProperty("Resolution_Width");
             String res_height = props.getProperty("Resolution_Height");
+            String desc = props.getProperty("Descending");
 
             SIZE = toInt(size, SIZE);
             WIDTH = toInt(size, SIZE);
@@ -55,6 +58,7 @@ public class Configuration {
             UPS = toInt(ups, UPS);
             RES_WIDTH = toInt(res_width, RES_WIDTH);
             RES_HEIGHT = toInt(res_height, RES_HEIGHT);
+            DESC = desc.contains("true");
         } catch (IOException e) {
             e.printStackTrace();
         }

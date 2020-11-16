@@ -21,7 +21,7 @@ public class SortingState extends State {
     public void inputs() {}
 
     @Override
-    public void update() {
+    public void update(double delta) {
         if(!algorithm.isDone())
             algorithm.iterate();
         else{

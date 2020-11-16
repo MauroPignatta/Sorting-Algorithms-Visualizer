@@ -26,7 +26,7 @@ public abstract class SortingAlgorithm {
 
     public SortingAlgorithm(@NotNull int[] array, boolean desc) {
         this(array);
-        this.desc = true;
+        this.desc = desc;
     }
 
     public float getCompletionTime() {

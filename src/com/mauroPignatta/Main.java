@@ -8,4 +8,5 @@ public class Main {
         Configuration.init();
 	    Visualizer visualizer = new Visualizer(Visualizer.UPS);
     }
+
 }

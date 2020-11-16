@@ -22,7 +22,7 @@ public class ResultState extends State {
     private SortResult results;
 
     private List<TextLabel> labels;
-    private UIButton back;
+    private UIButton backButton;
 
     public ResultState(SortResult results) {
         super(NAME);
@@ -34,8 +34,8 @@ public class ResultState extends State {
     public void inputs() {}
 
     @Override
-    public void update() {
-        back.update();
+    public void update(double delta) {
+        backButton.update();
     }
 
     @Override
@@ -43,7 +43,7 @@ public class ResultState extends State {
         for(TextLabel label : labels){
             label.render(g);
         }
-        back.render(g);
+        backButton.render(g);
     }
 
 
@@ -58,7 +58,7 @@ public class ResultState extends State {
         Color color = Color.white;
 
         TextLabel result = new TextLabel(WIDTH / 2, HEIGHT / 20, 0.5f, color, font, "Results");
-
+        
         TextLabel algorithm = new TextLabel(column1, y, 0f, color, font, "Algorithm used:");
         TextLabel algorithmResult = new TextLabel(column2, y, 1f, color, font, "" + results.getAlgorithm());
 
@@ -86,7 +86,7 @@ public class ResultState extends State {
         labels.add(swaps);
         labels.add(swapsResult);
 
-        back = new TextButton(WIDTH / 2, HEIGHT - y,0.5f, color, Color.YELLOW, font, "Back to menu") {
+        backButton = new TextButton(WIDTH / 2, HEIGHT - y,0.5f, color, Color.YELLOW, font, "Back to menu") {
             @Override
             protected void onClick() {
                 StateManager.getManager().setCurrentState(MenuState.NAME);
